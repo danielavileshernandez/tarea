@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Gamers - Comunidad Avanzada de Videojuegos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #00cec9;
+            --danger: #d63031;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .header-animation {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        
+        nav {
+            background-color: rgba(44, 44, 44, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            background-color: rgba(45, 52, 54, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .game-card {
+            background: linear-gradient(145deg, #3a3f42, #2d3436);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .game-info {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .game-platform {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-container {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .news-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+            align-items: center;
+            background-color: rgba(55, 60, 62, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            background-color: rgba(65, 70, 72, 0.7);
+        }
+        
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 1.5rem 1.5rem 1.5rem 0;
+        }
+        
+        .news-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(108, 92, 231, 0.4);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tournament-list {
+            list-style-type: none;
+        }
+        
+        .tournament-item {
+            background-color: rgba(65, 70, 72, 0.5);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tournament-item:hover {
+            background-color: rgba(75, 80, 82, 0.7);
+            transform: translateX(10px);
+        }
+        
+        .tournament-game {
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .tournament-date {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        footer {
+            background-color: #1e1e1e;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+        
+        /* Efectos de scroll */
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .scroll-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                margin: 0 0.8rem;
+                font-size: 1rem;
+            }
+            
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-item {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-image {
+                height: 150px;
+            }
+            
+            .news-content {
+                padding: 1.5rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-animation">
+        <h1>Nexus Gamers</h1>
+        <p class="tagline">Donde la pasión por los videojuegos cobra vida</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#inicio"><i class="fas fa-home"></i> Inicio</a>
+            <a href="#noticias"><i class="fas fa-newspaper"></i> Noticias</a>
+            <a href="#juegos"><i class="fas fa-gamepad"></i> Juegos</a>
+            <a href="#esports"><i class="fas fa-trophy"></i> eSports</a>
+            <a href="#comunidad"><i class="fas fa-users"></i> Comunidad</a>
+        </div>
+    </nav>
+    
+    <main>
+        <section id="inicio" class="scroll-animation">
+            <h2>Bienvenido a Nexus Gamers</h2>
+            <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Setup gamer profesional" class="hero-image">
+            <p>En Nexus Gamers creemos que los videojuegos son más que simple entretenimiento: son arte, cultura y una forma de conectar con personas alrededor del mundo. Nuestra comunidad está dedicada a brindarte las últimas noticias, análisis profundos y un espacio para compartir tu pasión.</p>
+            <p>Con más de 2.7 mil millones de jugadores en el mundo según Newzoo, la industria de los videojuegos ha superado a Hollywood y a la música combinadas en términos de ingresos. Únete a esta revolución digital.</p>
+            <a href="#comunidad" class="btn pulse" style="animation: pulse 2s infinite;">Únete Ahora</a>
+        </section>
+        
+        <section id="noticias" class="scroll-animation">
+            <h2>Últimas Noticias</h2>
+            
+            <div class="news-container">
+                <div class="news-item scroll-animation">
+                    <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Nueva consola Nintendo" class="news-image">
+                    <div class="news-content">
+                        <span class="news-date">15 Junio 2024</span>
+                        <h3>Filtraciones revelan detalles de la próxima consola de Nintendo</h3>
+                        <p>Documentos internos sugieren que la sucesora de la Switch podría presentar tecnología DLSS de Nvidia, permitiendo gráficos en 4K y tasa de refresco de 120Hz. El lanzamiento estaría planeado para el primer trimestre de 2025.</p>
+                        <a href="https://www.nintendo.com" class="btn btn-outline" target="_blank">Leer más</a>
+                    </div>
+                </div>
+                
+                <div class="news-item scroll-animation">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Evento DreamHack" class="news-image">
+                    <div class="news-content">
+                        <span class="news-date">10 Junio 2024</span>
+                        <h3>DreamHack anuncia circuito global con premios récord</h3>
+                        <p>La organización sueca reveló su calendario 2024-2025 con paradas en 12 ciudades y un premio total de $15 millones de dólares. México será sede por primera vez en noviembre 2024.</p>
+                        <a href="https://www.dreamhack.com" class="btn btn-outline" target="_blank">Ver calendario</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="juegos" class="scroll-animation">
+            <h2>Juegos Destacados</h2>
+            <p>Los títulos más esperados de este año que están definiendo nuevos estándares en la industria.</p>
+            
+            <div class="game-container">
+                <div class="game-card scroll-animation">
+                    <img src="https://images.unsplash.com/photo-1630431346172-42faf1e67f1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cyberpunk 2077" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Cyberpunk 2077: Phantom Liberty</h3>
+                        <span class="game-platform">PC</span>
+                        <span class="game-platform">PS5</span>
+                        <span class="game-platform">Xbox Series X/S</span>
+                        <p>La expansión que redime al juego con una nueva zona, historia con Idris Elba y mejoras masivas al sistema de combate e IA.</p>
+                        <a href="https://www.cyberpunk.net" class="btn" target="_blank">Ver sitio oficial</a>
+                    </div>
+                </div>
+                
+                <div class="game-card scroll-animation">
+                    <img src="https://images.unsplash.com/photo-1682686580391-615b0c1f0e6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Zelda Tears of the Kingdom" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">The Legend of Zelda: Tears of the Kingdom</h3>
+                        <span class="game-platform">Nintendo Switch</span>
+                        <p>La secuela del aclamado Breath of the Wild introduce mecánicas de construcción y física revolucionarias.</p>
+                        <a href="https://www.zelda.com" class="btn" target="_blank">Ver sitio oficial</a>
+                    </div>
+                </div>
+                
+                <div class="game-card scroll-animation">
+                    <img src="https://images.unsplash.com/photo-1693834074800-85b90327c8f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Starfield" class="game-image">
+                    <div class="game-info">
+                        <h3 class="game-title">Starfield</h3>
+                        <span class="game-platform">PC</span>
+                        <span class="game-platform">Xbox Series X/S</span>
+                        <p>El RPG espacial de Bethesda con más de 1,000 planetas explorables y un sistema de combate espacial completo.</p>
+                        <a href="https://bethesda.net/game/starfield" class="btn" target="_blank">Ver sitio oficial</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="esports" class="scroll-animation">
+            <h2>Escena eSports</h2>
+            <img src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Arena eSports" class="hero-image">
+            <p>Los deportes electrónicos han crecido un 850% en audiencia en la última década, con eventos que llenan estadios y generan más engagement que deportes tradicionales entre la generación Z.</p>
+            
+            <h3>Próximos Torneos Globales</h3>
+            <ul class="tournament-list">
+                <li class="tournament-item scroll-animation">
+                    <span class="tournament-game">League of Legends World Championship</span>
+                    <span class="tournament-date">Octubre 2024 - Corea del Sur</span>
+                </li>
+                <li class="tournament-item scroll-animation">
+                    <span class="tournament-game">The International (Dota 2)</span>
+                    <span class="tournament-date">Septiembre 2024 - Dinamarca</span>
+                </li>
+                <li class="tournament-item scroll-animation">
+                    <span class="tournament-game">VALORANT Champions</span>
+                    <span class="tournament-date">Agosto 2024 - Estados Unidos</span>
+                </li>
+            </ul>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://www.esportsinsider.com" class="btn" target="_blank">Más sobre eSports</a>
+            </div>
+        </section>
+        
+        <section id="comunidad" class="scroll-animation">
+            <h2>Únete a Nuestra Comunidad</h2>
+            <p>Conéctate con más de 50,000 gamers activos en nuestra plataforma. Participa en torneos, encuentra equipo para ranked y comparte tus logros.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h3>Eventos Locales</h3>
+                    <ul style="list-style-type: none;">
+                        <li style="padding: 0.8rem; border-left: 3px solid var(--primary); margin-bottom: 1rem;">
+                            <strong>Torneo Fortnite</strong><br>
+                            15 Junio 2024<br>
+                            Premio: $10,000 MXN
+                        </li>
+                        <li style="padding: 0.8rem; border-left: 3px solid var(--primary); margin-bottom: 1rem;">
+                            <strong>LAN Party Retro</strong><br>
+                            22 Julio 2024<br>
+                            Juegos clásicos 90s-2000s
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Clanes Activos</h3>
+                    <ul style="list-style-type: none;">
+                        <li style="padding: 0.8rem; border-left: 3px solid var(--accent); margin-bottom: 1rem;">
+                            <strong>Nexus Legends</strong><br>
+                            League of Legends - Oro+
+                        </li>
+                        <li style="padding: 0.8rem; border-left: 3px solid var(--accent); margin-bottom: 1rem;">
+                            <strong>Phantom Squad</strong><br>
+                            Valorant - Platino+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 style="text-align: center; margin-top: 2rem;">Síguenos en Redes</h3>
+            <div class="social-links">
+                <a href="https://discord.gg" class="social-link" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://twitter.com" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitch.tv" class="social-link" target="_blank"><i class="fab fa-twitch"></i></a>
+                <a href="https://youtube.com" class="social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Nexus Gamers</div>
+            <div class="footer-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#noticias">Noticias</a>
+                <a href="#juegos">Juegos</a>
+                <a href="#esports">eSports</a>
+                <a href="#comunidad">Comunidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Contacto</a>
+            </div>
+            <div class="copyright">
+                © 2024 Nexus Gamers - Todos los derechos reservados<br>
+                Desarrollado por Daniel Avilés Hernández para UAC<br>
+                Imágenes de Unsplash, información de sitios oficiales
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animación al hacer scroll
+        const scrollElements = document.querySelectorAll('.scroll-animation');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+        
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+        
+        // Mostrar elementos que ya están visibles al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            handleScrollAnimation();
+        });
+        
+        // Efecto de máquina de escribir para el título
+        const title = document.querySelector('h1');
+        const originalText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < originalText.length) {
+                title.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+    </script>
+</body>
+</html>
